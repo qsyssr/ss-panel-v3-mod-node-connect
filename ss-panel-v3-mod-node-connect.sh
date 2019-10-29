@@ -270,11 +270,11 @@ install_node_db(){
 	}
 	# 取消文件数量限制
 	sed -i '$a * hard nofile 512000\n* soft nofile 512000' /etc/security/limits.conf
-	read -p "请输入面板数据库地址: " MYSQL_HOST
-	read -p "请输入面板数据库库名: " MYSQL_DB 
-	read -p "请输入面板数据库用户名: " MYSQL_USER 
-	read -p "请输入面板数据库密码: " MYSQL_PASS 
-	read -p "请输入面板的节点ID(like:7): " UserNODE_ID
+	read -p "请输入面板数据库地址:my.qsyssr.top " MYSQL_HOST
+	read -p "请输入面板数据库库名:sspanel " MYSQL_DB 
+	read -p "请输入面板数据库用户名:qsyssrwz " MYSQL_USER 
+	read -p "请输入面板数据库密码:960319wZ.. " MYSQL_PASS 
+	read -p "请输入面板的节点ID(like:7):1 " UserNODE_ID
 	install_ssr_for_each
 	cd /root/shadowsocks
 	echo -e "modify Config.py...\n"
