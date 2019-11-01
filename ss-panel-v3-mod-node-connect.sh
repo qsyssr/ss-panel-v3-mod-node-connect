@@ -279,16 +279,16 @@ install_node_db(){
 	cd /root/shadowsocks
 	echo -e "modify Config.py...\n"
 	sed -i "s#'modwebapi'#'glzjinmod'#" /root/shadowsocks/userapiconfig.py #改成数据库对接
-	sed -i "s#'zhaoj.in'#'jd.hk'#" /root/shadowsocks/userapiconfig.py #混淆设置
+	sed -i "s#'zhaoj.in'#'zhaoj.in'#" /root/shadowsocks/userapiconfig.py #混淆设置
 	MYSQL_HOST=${MYSQL_HOST:-"http://127.0.0.1"}
-	sed -i "s#MYSQL_HOST = '127.0.0.1'#MYSQL_HOST = '${MYSQL_HOST}'#" /root/shadowsocks/userapiconfig.py
-	MYSQL_DB=${MYSQL_DB:-"root"}
+	sed -i "s#MYSQL_HOST = 'my.qsyssr.top'#MYSQL_HOST = '${MYSQL_HOST}'#" /root/shadowsocks/userapiconfig.py
+	MYSQL_DB=${MYSQL_DB:-"sspanel"}
 	sed -i "s#MYSQL_DB = 'shadowsocks'#MYSQL_DB = '${MYSQL_DB}'#" /root/shadowsocks/userapiconfig.py
-	MYSQL_USER=${MYSQL_USER:-"root"}
+	MYSQL_USER=${MYSQL_USER:-"qsyssrwz"}
 	sed -i "s#MYSQL_USER = 'ss'#MYSQL_USER = '${MYSQL_USER}'#" /root/shadowsocks/userapiconfig.py
-	MYSQL_PASS=${MYSQL_PASS:-"root"}
+	MYSQL_PASS=${MYSQL_PASS:-"960319wZ.."}
 	sed -i "s#MYSQL_PASS = 'ss'#MYSQL_PASS = '${MYSQL_PASS}'#" /root/shadowsocks/userapiconfig.py
-	UserNODE_ID=${UserNODE_ID:-"3"}
+	UserNODE_ID=${UserNODE_ID:-"7"}
 	sed -i '2d' /root/shadowsocks/userapiconfig.py
 	sed -i "2a\NODE_ID = ${UserNODE_ID}" /root/shadowsocks/userapiconfig.py
 	# 启用supervisord
