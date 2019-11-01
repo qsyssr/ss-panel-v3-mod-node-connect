@@ -273,7 +273,7 @@ install_node_db(){
 	read -p "请输入面板数据库地址:my.qsyssr.top" MYSQL_HOST
 	read -p "请输入面板数据库库名:sspanel" MYSQL_DB 
 	read -p "请输入面板数据库用户名:qsyssrwz" MYSQL_USER 
-	read -p "请输入面板数据库密码:960319wZ.." MYSQL_PASS 
+	read -p "请输入面板数据库密码:" MYSQL_PASS 
 	read -p "请输入面板的节点ID(like:7): " UserNODE_ID
 	install_ssr_for_each
 	cd /root/shadowsocks
@@ -286,7 +286,7 @@ install_node_db(){
 	sed -i "s#MYSQL_DB = 'shadowsocks'#MYSQL_DB = '${MYSQL_DB}'#" /root/shadowsocks/userapiconfig.py
 	MYSQL_USER=${MYSQL_USER:-"qsyssrwz"}
 	sed -i "s#MYSQL_USER = 'ss'#MYSQL_USER = '${MYSQL_USER}'#" /root/shadowsocks/userapiconfig.py
-	MYSQL_PASS=${MYSQL_PASS:-"960319wZ.."}
+	MYSQL_PASS=${MYSQL_PASS:-""}
 	sed -i "s#MYSQL_PASS = 'ss'#MYSQL_PASS = '${MYSQL_PASS}'#" /root/shadowsocks/userapiconfig.py
 	UserNODE_ID=${UserNODE_ID:-"7"}
 	sed -i '2d' /root/shadowsocks/userapiconfig.py
