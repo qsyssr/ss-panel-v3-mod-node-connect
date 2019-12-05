@@ -11,9 +11,9 @@ Libtest(){
 	echo "$LIB_PING $LIB" >> ping.pl
 	libAddr=`sort -V ping.pl|sed -n '1p'|awk '{print $2}'`
 	if [ "$libAddr" == "$GIT" ];then
-		libAddr='https://raw.githubusercontent.com/lizhongnian/ss-panel-v3-mod-node-connect/master/libsodium-1.0.13.tar.gz'
+		libAddr='https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18.tar.gz'
 	else
-		libAddr='https://download.libsodium.org/libsodium/releases/libsodium-1.0.13.tar.gz'
+		libAddr='https://download.libsodium.org/libsodium/releases/libsodium-1.0.18.tar.gz'
 	fi
 	rm -f ping.pl		
 }
@@ -94,11 +94,11 @@ install_centos_ssr(){
 	pip install --upgrade pip
 	Libtest
 	wget --no-check-certificate $libAddr
-	tar xf libsodium-1.0.13.tar.gz && cd libsodium-1.0.13
+	tar xf libsodium-1.0.18.tar.gz && cd libsodium-1.0.18
 	./configure && make -j2 && make install
 	echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf
 	ldconfig
-	git clone -b manyuser https://github.com/lizhongnian/shadowsocks.git "/root/shadowsocks"
+	git clone -b manyuser https://github.com/Anankke/shadowsocks-mod.git "/root/shadowsocks"
 	cd /root/shadowsocks
 	chkconfig supervisord on
 	#第一次安装
@@ -138,14 +138,14 @@ install_ubuntu_ssr(){
 	apt-get install iptables git -y
 	Libtest
 	wget --no-check-certificate $libAddr
-	tar xf libsodium-1.0.13.tar.gz && cd libsodium-1.0.13
+	tar xf libsodium-1.0.18.tar.gz && cd libsodium-1.0.18
 	./configure && make -j2 && make install
 	echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf
 	ldconfig
 	apt-get install python-pip git -y
 	pip install cymysql
 	cd /root
-	git clone -b master https://github.com/lizhongnian/shadowsocks.git "/root/shadowsocks"
+	git clone -b master https://github.com/Anankke/shadowsocks-mod.git "/root/shadowsocks"
 	cd shadowsocks
 	pip install -r requirements.txt
 	chmod +x *.sh
@@ -199,7 +199,7 @@ install_node(){
 	install_ssr_for_each
 	cd /root/shadowsocks
 	echo -e "modify Config.py...\n"
-	sed -i "s#'zhaoj.in'#'jd.hk'#" /root/shadowsocks/userapiconfig.py
+	sed -i "s#'zhaoj.in'#'zhaoj.in'#" /root/shadowsocks/userapiconfig.py
 	Userdomain=${Userdomain:-"http://127.0.0.1"}
 	sed -i "s#https://zhaoj.in#${Userdomain}#" /root/shadowsocks/userapiconfig.py
 	Usermukey=${Usermukey:-"mupass"}
@@ -281,7 +281,7 @@ install_node_db(){
 	sed -i "s#'modwebapi'#'glzjinmod'#" /root/shadowsocks/userapiconfig.py #改成数据库对接
 	sed -i "s#'zhaoj.in'#'zhaoj.in'#" /root/shadowsocks/userapiconfig.py #混淆设置
 	MYSQL_HOST=${MYSQL_HOST:-"http://127.0.0.1"}
-	sed -i "s#MYSQL_HOST = 'my.qsyssr.top'#MYSQL_HOST = '${MYSQL_HOST}'#" /root/shadowsocks/userapiconfig.py
+	sed -i "s#MYSQL_HOST = ''#MYSQL_HOST = '${MYSQL_HOST}'#" /root/shadowsocks/userapiconfig.py
 	MYSQL_DB=${MYSQL_DB:-"sspanel"}
 	sed -i "s#MYSQL_DB = 'shadowsocks'#MYSQL_DB = '${MYSQL_DB}'#" /root/shadowsocks/userapiconfig.py
 	MYSQL_USER=${MYSQL_USER:-"qsyssrwz"}
